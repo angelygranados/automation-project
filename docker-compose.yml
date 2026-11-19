@@ -1,0 +1,24 @@
+# Local equivalents of the CI jobs.
+#   docker compose run --rm tests            -> full suite in the Playwright image
+#   docker compose up -d juice-shop && docker compose run --rm zap   -> ZAP baseline scan
+services:
+  tests:
+    build: .
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./playwright-report:/app/playwright-report
+
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    ports:
+      - '3000:3000'
+
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    depends_on: [juice-shop]
+    volumes:
+      - ./.zap:/zap/wrk/config:ro
+      - ./zap-report:/zap/wrk
+    command: >
+      zap-baseline.py -t http://juice-shop:3000 -c config/rules.tsv
+      -r report.html -J report.json -I

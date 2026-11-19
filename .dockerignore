@@ -1,0 +1,9 @@
+node_modules
+.git
+.env
+.auth
+test-results
+playwright-report
+allure-results
+allure-report
+zap-report
