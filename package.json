@@ -21,7 +21,7 @@
   "license": "MIT",
   "description": "Playwright + TypeScript framework: API and E2E tests, Allure reporting, GitHub Actions CI, OWASP ZAP scan and Docker.",
   "devDependencies": {
-    "@eslint/js": "^9.39.5",
+    "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.6.0",
     "@playwright/test": "1.65.1",
     "@types/node": "^26.6.6",
